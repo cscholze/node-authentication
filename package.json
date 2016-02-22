@@ -1,0 +1,26 @@
+{
+  "name": "node-authentication",
+  "version": "1.0.0",
+  "description": "An app to learn user authentication in Node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "eslintConfig" : {
+    "env": {
+      "browser": true,
+      "node": true,
+      "es6": true
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cscholze/node-authentication.git"
+  },
+  "author": "Caleb Scholze <jcsdevel@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cscholze/node-authentication/issues"
+  },
+  "homepage": "https://github.com/cscholze/node-authentication#readme"
+}
