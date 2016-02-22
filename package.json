@@ -2,11 +2,12 @@
   "name": "node-authentication",
   "version": "1.0.0",
   "description": "An app to learn user authentication in Node.js",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
+    "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "eslintConfig" : {
+  "eslintConfig": {
     "env": {
       "browser": true,
       "node": true,
@@ -22,5 +23,13 @@
   "bugs": {
     "url": "https://github.com/cscholze/node-authentication/issues"
   },
-  "homepage": "https://github.com/cscholze/node-authentication#readme"
+  "homepage": "https://github.com/cscholze/node-authentication#readme",
+  "dependencies": {
+    "express": "^4.13.4",
+    "jade": "^1.11.0"
+  },
+  "devDependencies": {
+    "eslint": "^2.2.0",
+    "nodemon": "^1.9.0"
+  }
 }
