@@ -3,23 +3,46 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const path = require('path');
+const connectRedis = require('connect-redis');
 const session = require('express-session');
 
 const app = express();
+const RedisStore = connectRedis(session);
 const PORT = process.env.PORT || 3000;
 const SESSION_SECRET = process.env.SESSION_SECRET || 'supersecret';
 
 // SET VIEW RENDERING ENGINE
 app.set('view engine', 'jade');
 
+// STATIC FILES
+app.use(express.static(path.join(__dirname, 'public')));
+
 // MIDDLEWARE
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({
-  secret: SESSION_SECRET
+  name: 'My Cookie',
+  cookie: {
+    path: '/',
+    httpOnly: true,
+    secure: false,
+    maxAge: 30000
+  },
+  secret: SESSION_SECRET,
+  store: new RedisStore({
+    host: '127.0.0.1',
+    port: '6379',
+  })
 }));
 
-// STATIC FILES
-app.use(express.static(path.join(__dirname, 'public')));
+app.use((req, res, next) => {
+  req.session.visits = req.session.visits || {};
+  req.session.visits[req.url] = req.session.visits[req.url] || 0;
+  req.session.visits[req.url]++;
+
+  console.log(req.session);
+  next();
+});
+
 
 app.get('/', (req, res) => {
   res.render('index.jade');
