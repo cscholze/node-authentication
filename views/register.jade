@@ -6,9 +6,9 @@ form(action='/register', method='POST')
     label(for='password') Password
     input(type='password', name='password', required)
   .input-group
-    if message
-      p= message
     label(for='verify') Verify Password
     input(type='password', name='verify', required)
+    if message
+      p= message
   .input-group
     input(type='submit', value='Register')
