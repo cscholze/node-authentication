@@ -1,9 +1,11 @@
 form(action='/login', method='POST')
   .input-group
     label(for='email') Email
-    input(type='email', name='email', autofocus, required)
+    input(type='email', name='email', value=email, autofocus, required)
   .input-group
     label(for='password') Password
     input(type='password', name='password', required)
   .input-group
     input(type='submit', value='login')
+  if message
+    p= message

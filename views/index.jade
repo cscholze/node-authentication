@@ -1,6 +1,13 @@
 h1 Welcome to authentication in Node.js
 
-button#btn-login Login
-button#btn-register Register
+if !user
+  button#btn-login Login
+  button#btn-register Register
+
+else
+  h2 Hello #{user.email}
+  form(action='/logout', method='POST')
+    .form-group
+      input(type='submit', value='Logout')
 
 script(src='/javascript/index.js' type='text/javascript')

@@ -25,11 +25,13 @@
   },
   "homepage": "https://github.com/cscholze/node-authentication#readme",
   "dependencies": {
+    "bcrypt": "^0.8.5",
     "body-parser": "^1.15.0",
     "connect-redis": "^3.0.2",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
-    "jade": "^1.11.0"
+    "jade": "^1.11.0",
+    "mongoose": "^4.4.4"
   },
   "devDependencies": {
     "eslint": "^2.2.0",

@@ -1,10 +1,13 @@
 'use strict';
 
 const bodyParser = require('body-parser');
-const express = require('express');
-const path = require('path');
 const connectRedis = require('connect-redis');
+const express = require('express');
+const mongoose = require('mongoose');
+const path = require('path');
 const session = require('express-session');
+const userRoutes = require('./lib/user/routes');
+
 
 const app = express();
 const RedisStore = connectRedis(session);
@@ -34,6 +37,14 @@ app.use(session({
   })
 }));
 
+app.use( (req, res, next) => {
+  app.locals.user = req.session.user || { email: 'Guest' };
+  next();
+});
+
+// ROUTES
+app.use(userRoutes);
+
 app.use((req, res, next) => {
   req.session.visits = req.session.visits || {};
   req.session.visits[req.url] = req.session.visits[req.url] || 0;
@@ -45,7 +56,7 @@ app.use((req, res, next) => {
 
 
 app.get('/', (req, res) => {
-  res.render('index.jade');
+  res.render('index.jade', {user: req.session.user});
 });
 
 app.post('/', (req, res) => {
@@ -53,29 +64,12 @@ app.post('/', (req, res) => {
   res.redirect('/login');
 });
 
-app.get('/login', (req, res) => {
-  res.render('login.jade');
-});
 
-app.post('/login', (req, res) => {
-  res.redirect('/');
-});
+// START MONGODB CONNECTION AND SERVER
+mongoose.connect('mongodb://localhost:27017/nodeauth', (err) => {
+  if (err) throw err;
 
-app.get('/register', (req, res) => {
-  res.render('register.jade');
-});
-
-app.post('/register', (req, res) => {
-  if (req.body.password === req.body.verify) {
-    res.redirect('/login');
-  }
-  else
-    res.render('register.jade', {
-      email: req.body.email,
-      message: "Passwords do not match"
-    });
-});
-
-app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}`);
+  app.listen(PORT, () => {
+    console.log(`App listening on port ${PORT}`);
+  });
 });
