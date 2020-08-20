@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/cscholze/node-authentication#readme",
   "dependencies": {
-    "bcrypt": "^0.8.5",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.15.0",
     "connect-redis": "^3.0.2",
     "express": "^4.13.4",
