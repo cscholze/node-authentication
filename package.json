@@ -31,7 +31,7 @@
     "express": "^4.13.4",
     "express-session": "^1.13.0",
     "jade": "^1.11.0",
-    "mongoose": "^4.4.4"
+    "mongoose": "^5.12.2"
   },
   "devDependencies": {
     "eslint": "^2.2.0",
